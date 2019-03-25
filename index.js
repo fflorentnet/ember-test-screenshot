@@ -2,15 +2,14 @@
 var imageServer = require('./lib/image-server');
 
 module.exports = {
-  name: require('./package').name,
+  name: 'ember-test-screenshot',
   isDevelopingAddon() {
     return true;
   },
-  
+
   serverMiddleware: function(startOptions) {
     imageServer.server(startOptions.app, {
-      configPath: this.project.configPath(),
-      root: this.project.root
+      config: this.project.configPath()
     });
   },
 
@@ -19,7 +18,6 @@ module.exports = {
     return this.addAddonsToProject({
       // a packages array defines the addons to install
       packages: [
-        // name is the addon name, and target (optional) is the version
         { name: 'html2canvas' }
       ]
     })
@@ -27,7 +25,6 @@ module.exports = {
 
   included: function (app) {
     this._super.included(app);
-    // console.log(app);
     app.import('node_modules/html2canvas/dist/html2canvas.min.js');
   }
 };

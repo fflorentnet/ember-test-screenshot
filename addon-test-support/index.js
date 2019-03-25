@@ -1,8 +1,4 @@
-// import html2canvas from 'npm:html2canvas';
-
-const screenshot = function (selector) {
-    console.log(...arguments);
-
+const screenshot = function (selector, opts) {
     const dom = document.querySelector(selector);
     if (!dom) {
         return Promise.reject(new Error('element not found'));
@@ -11,10 +7,12 @@ const screenshot = function (selector) {
         var request = new XMLHttpRequest();
         request.open('POST', '/image_generation');
         request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-        return request.send(JSON.stringify({
+        const data = {
             selector,
             image: canvas.toDataURL()
-        }));        
+        };
+        Object.assign(data, opts, data);
+        return request.send(JSON.stringify(data));
     });
 }
 
