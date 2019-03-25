@@ -21,6 +21,7 @@
     "test:all": "ember try:each"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "ember-cli-babel": "^7.1.2"
   },
   "devDependencies": {
@@ -46,6 +47,7 @@
     "ember-try": "^1.0.0",
     "eslint-plugin-ember": "^5.2.0",
     "eslint-plugin-node": "^7.0.1",
+    "html2canvas": "^1.0.0-alpha.12",
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.8.0"
   },

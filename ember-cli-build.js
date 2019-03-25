@@ -5,7 +5,17 @@ const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
     // Add options here
+    autoImport: {
+      webpack: {
+        devtool: 'source-map',
+      },
+    },
+    babel: {
+      plugins: [require('ember-auto-import/babel-plugin')],
+    },
   });
+
+  // app.import('node_modules/html2canvas/html2canvas.min.js');
 
   /*
     This build file specifies the options for the dummy test app of this
