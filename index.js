@@ -8,23 +8,20 @@ module.exports = {
   },
 
   serverMiddleware: function(startOptions) {
-    imageServer.server(startOptions.app, {
+    return imageServer.server(startOptions.app, {
       config: this.project.configPath()
     });
   },
 
-  afterInstall() {
-    // Add addons to package.json and run defaultBlueprint
-    return this.addAddonsToProject({
-      // a packages array defines the addons to install
-      packages: [
-        { name: 'html2canvas' }
-      ]
-    })
-  },
-
-  included: function (app) {
-    this._super.included(app);
-    app.import('node_modules/html2canvas/dist/html2canvas.min.js');
+  testemMiddleware: function (app) {
+    const config = {
+      configPath: this.project.configPath()
+    };
+    if (process.argv.includes('--server') || process.argv.includes('-s')) {
+      return this.serverMiddleware({ app }, config);
+    }
+    return imageServer.server(app, {
+      config: this.project.configPath()
+    });
   }
 };
