@@ -23,5 +23,15 @@ module.exports = {
     return imageServer.server(app, {
       config: this.project.configPath()
     });
+  },
+
+  afterInstall() {
+    // Add addons to package.json and run defaultBlueprint
+    return this.addAddonsToProject({
+      // a packages array defines the addons to install
+      packages: [
+        { name: 'foxr' }
+      ]
+    })
   }
 };
